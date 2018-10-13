@@ -1,10 +1,15 @@
 package com.kwiniarski97.models;
 
 
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
+@Entity
 public class Post {
 
+    @Id
+    @GeneratedValue
     private long id;
     private String title;
     private String subtitle;
@@ -16,6 +21,18 @@ public class Post {
     private long views;
     private long score;
     private long authorId;
+
+    @ManyToOne
+    @JoinColumn(name = "authorId", nullable = false, insertable=false, updatable=false)
+    private Author author;
+
+    @ManyToMany
+    @JoinTable(
+            name = "post_tag",
+            joinColumns = { @JoinColumn(name = "post_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
+    )
+    Set<Tag> tags;
 
     public Post() {
     }
@@ -132,4 +149,11 @@ public class Post {
         this.authorId = authorId;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 }

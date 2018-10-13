@@ -1,8 +1,14 @@
 package com.kwiniarski97.models;
 
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
 public class Author {
 
+    @Id
+    @GeneratedValue
     private long id;
     private String firstName;
     private String lastName;
@@ -12,6 +18,9 @@ public class Author {
     private String email;
     private String imagePath;
     private String description;
+
+    @OneToMany(mappedBy="author")
+    private Set<Post> posts;
 
     public Author() {
     }
@@ -27,6 +36,7 @@ public class Author {
         this.imagePath = imagePath;
         this.description = description;
     }
+
 
     public long getId() {
         return id;
@@ -108,4 +118,11 @@ public class Author {
         this.description = description;
     }
 
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
 }
