@@ -166,4 +166,12 @@ public class Post {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
 }

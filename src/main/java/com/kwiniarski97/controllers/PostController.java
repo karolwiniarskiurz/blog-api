@@ -13,31 +13,30 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/posts")
 public class PostController {
 
-
     @Autowired
     private PostService postService;
 
     @RequestMapping("/recent/{page}")
-    public Page<PostRecentDTO> getRecent(@PathVariable(value="page")int page) {
+    public Page<PostRecentDTO> getRecent(@PathVariable(value = "page") int page) {
         return postService.getLatest(page);
     }
 
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
-    public long create(@RequestBody PostCreateDTO post){
+    public long create(@RequestBody PostCreateDTO post) {
         return postService.create(post);
     }
 
     @PutMapping("/publish/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public void publish(@PathVariable(value = "id") long id){
+    public void publish(@PathVariable(value = "id") long id) {
         postService.publish(id);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public void delete(@PathVariable(value = "id") long id){
+    public void delete(@PathVariable(value = "id") long id) {
         postService.delete(id);
     }
 }
