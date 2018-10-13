@@ -1,4 +1,4 @@
-package com.kwiniarski97.models;
+package com.kwiniarski97.models.domain;
 
 
 import javax.persistence.*;
@@ -16,10 +16,11 @@ public class Author {
     private String passwordHash;
     private String passwordSalt;
     private String email;
-    private String imagePath;
+    private String avatarPath;
     private String description;
+    private Role role;
 
-    @OneToMany(mappedBy="author")
+    @OneToMany(mappedBy = "author")
     private Set<Post> posts;
 
     public Author() {
@@ -33,7 +34,7 @@ public class Author {
         this.passwordHash = passwordHash;
         this.passwordSalt = passwordSalt;
         this.email = email;
-        this.imagePath = imagePath;
+        this.avatarPath = imagePath;
         this.description = description;
     }
 
@@ -101,12 +102,12 @@ public class Author {
     }
 
 
-    public String getImagePath() {
-        return imagePath;
+    public String getAvatarPath() {
+        return avatarPath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
     }
 
 

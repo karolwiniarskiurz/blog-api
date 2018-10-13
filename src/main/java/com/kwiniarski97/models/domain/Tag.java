@@ -1,4 +1,4 @@
-package com.kwiniarski97.models;
+package com.kwiniarski97.models.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

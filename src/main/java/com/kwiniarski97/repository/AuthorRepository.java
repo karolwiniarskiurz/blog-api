@@ -1,6 +1,6 @@
 package com.kwiniarski97.repository;
 
-import com.kwiniarski97.models.Author;
+import com.kwiniarski97.models.domain.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

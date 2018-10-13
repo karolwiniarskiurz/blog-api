@@ -1,4 +1,4 @@
-package com.kwiniarski97.models;
+package com.kwiniarski97.models.domain;
 
 
 import javax.persistence.*;
@@ -15,11 +15,13 @@ public class Post {
     private String subtitle;
     private String mainImagePath;
     private String mainImageThumbnailPath;
+    @Column(columnDefinition="TEXT")
     private String body;
     private Timestamp creationDate;
     private Timestamp publishDate;
     private long views;
     private long score;
+    private boolean isDeleted;
     private long authorId;
 
     @ManyToOne
