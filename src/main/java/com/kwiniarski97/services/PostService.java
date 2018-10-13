@@ -26,11 +26,14 @@ public class PostService {
     /**
      * @param page 1 - indexed
      */
-    public Page<Post> getLatest(int page) {
+    public Page<PostRecentDTO> getLatest(int page) {
         Pageable request = new PageRequest(page - 1, PAGE_SIZE, Sort.Direction.DESC, "publishDate");
-        var list = repository.findByPublishDateIsNotNullAndDeletedIsFalse(request);
-        list.map(post -> mapper.map(post, PostRecentDTO.class));
-        return list;
+        var entities = repository.findByPublishDateIsNotNullAndDeletedIsFalse(request);
+        return entities.map(entity -> {
+            var dest = new PostRecentDTO();
+            mapper.map(entity, dest);
+            return dest;
+        });
     }
 
     public long create(PostCreateDTO postCreate) {
@@ -47,7 +50,7 @@ public class PostService {
         this.repository.flush();
     }
 
-    public void delete(long id){
+    public void delete(long id) {
         var post = repository.findOne(id);
         post.setDeleted(true);
         this.repository.flush();
@@ -57,4 +60,5 @@ public class PostService {
     private Timestamp getCurrentTimeStamp() {
         return new Timestamp(new Date().getTime());
     }
+
 }

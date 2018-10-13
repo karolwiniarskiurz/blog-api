@@ -2,6 +2,7 @@ package com.kwiniarski97.controllers;
 
 import com.kwiniarski97.models.domain.Post;
 import com.kwiniarski97.models.dtos.PostCreateDTO;
+import com.kwiniarski97.models.dtos.PostRecentDTO;
 import com.kwiniarski97.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,7 @@ public class PostController {
     private PostService postService;
 
     @RequestMapping("/recent/{page}")
-    public Page<Post> getRecent(@PathVariable(value="page")int page) {
+    public Page<PostRecentDTO> getRecent(@PathVariable(value="page")int page) {
         return postService.getLatest(page);
     }
 
