@@ -1,6 +1,8 @@
 package com.kwiniarski97.models.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -21,6 +23,7 @@ public class Author {
     private Role role;
 
     @OneToMany(mappedBy = "author")
+    @JsonIgnore
     private Set<Post> posts;
 
     public Author() {
