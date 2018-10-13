@@ -23,7 +23,8 @@ public class PostController {
 
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void create(@RequestBody Post post){
-        postService.create(post);
+    @ResponseBody
+    public long create(@RequestBody Post post){
+        return postService.create(post);
     }
 }

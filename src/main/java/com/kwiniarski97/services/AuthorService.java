@@ -12,7 +12,9 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
-    public void create(Author author){
-        this.authorRepository.save(author);
+    public long create(Author author){
+        var obj = this.authorRepository.save(author);
+        this.authorRepository.flush();
+        return obj.getId();
     }
 }

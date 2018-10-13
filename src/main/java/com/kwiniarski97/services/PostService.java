@@ -19,7 +19,9 @@ public class PostService {
         return repository.findAll(request);
     }
 
-    public void create(Post post) {
-        this.repository.save(post);
+    public long create(Post post) {
+        var obj = this.repository.save(post);
+        this.repository.flush();
+        return obj.getId();
     }
 }
