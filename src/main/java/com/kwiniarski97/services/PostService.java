@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -30,7 +28,7 @@ public class PostService {
      */
     public Page<Post> getLatest(int page) {
         Pageable request = new PageRequest(page - 1, PAGE_SIZE, Sort.Direction.DESC, "publishDate");
-        var list = repository.findByPublishDateIsNotNull(request);
+        var list = repository.findByPublishDateIsNotNullAndDeletedIsFalse(request);
         list.map(post -> mapper.map(post, PostRecentDTO.class));
         return list;
     }
@@ -46,6 +44,12 @@ public class PostService {
     public void publish(long id) {
         var post = repository.findOne(id);
         post.setPublishDate(getCurrentTimeStamp());
+        this.repository.flush();
+    }
+
+    public void delete(long id){
+        var post = repository.findOne(id);
+        post.setDeleted(true);
         this.repository.flush();
     }
 

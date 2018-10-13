@@ -21,7 +21,7 @@ public class Post {
     private Timestamp publishDate;
     private long views;
     private long score;
-    private boolean isDeleted;
+    private boolean deleted;
     private long authorId;
 
     @ManyToOne
@@ -157,5 +157,13 @@ public class Post {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

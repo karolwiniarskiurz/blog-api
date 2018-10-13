@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     // great job creating query by name best idea ever 😖
-    Page<Post> findByPublishDateIsNotNull(Pageable pageable);
+    Page<Post> findByPublishDateIsNotNullAndDeletedIsFalse(Pageable pageable);
 
     Page<Post> findByAuthorId(long authorId, Pageable pageable);
 }

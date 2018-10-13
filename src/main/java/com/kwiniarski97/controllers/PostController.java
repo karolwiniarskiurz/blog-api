@@ -33,4 +33,10 @@ public class PostController {
     public void publish(@PathVariable(value = "id") long id){
         postService.publish(id);
     }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void delete(@PathVariable(value = "id") long id){
+        postService.delete(id);
+    }
 }
