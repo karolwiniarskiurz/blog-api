@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 
-public class PostRecentDTO {
+public class PostReducedDTO {
     @Getter
     @Setter
     public long id;

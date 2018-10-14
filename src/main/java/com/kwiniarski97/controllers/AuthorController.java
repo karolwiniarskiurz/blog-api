@@ -4,6 +4,7 @@ import com.kwiniarski97.models.domain.Author;
 import com.kwiniarski97.models.dtos.AuthenticateDTO;
 import com.kwiniarski97.models.dtos.AuthenticationDTO;
 import com.kwiniarski97.models.dtos.AuthorCreateDTO;
+import com.kwiniarski97.models.dtos.AuthorDTO;
 import com.kwiniarski97.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,5 +42,11 @@ public class AuthorController {
         } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @RequestMapping("/{id}")
+    @ResponseBody
+    public AuthorDTO getByID(@PathVariable(value = "id") long id){
+        return authorService.getById(id);
     }
 }

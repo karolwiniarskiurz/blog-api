@@ -1,14 +1,15 @@
 package com.kwiniarski97.controllers;
 
-import com.kwiniarski97.models.domain.Post;
 import com.kwiniarski97.models.dtos.PostCreateDTO;
 import com.kwiniarski97.models.dtos.PostDetailDTO;
-import com.kwiniarski97.models.dtos.PostRecentDTO;
+import com.kwiniarski97.models.dtos.PostReducedDTO;
 import com.kwiniarski97.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
@@ -18,7 +19,7 @@ public class PostController {
     private PostService postService;
 
     @RequestMapping("/recent/{page}")
-    public Page<PostRecentDTO> getRecent(@PathVariable(value = "page") int page) {
+    public Page<PostReducedDTO> getRecent(@PathVariable(value = "page") int page) {
         return postService.getLatest(page);
     }
 
@@ -49,7 +50,13 @@ public class PostController {
 
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public PostDetailDTO getById(@PathVariable(value = "id") long id){
+    public PostDetailDTO getById(@PathVariable(value = "id") long id) {
         return postService.getById(id);
+    }
+
+    @GetMapping("/tag/{tagId}/{page}")
+    @ResponseBody
+    public Page<PostReducedDTO> getByTagId(@PathVariable(value = "tagId") long tagId, @PathVariable(value = "page") int page) {
+        return postService.getByTagId(tagId, page);
     }
 }

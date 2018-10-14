@@ -5,6 +5,7 @@ import com.kwiniarski97.models.domain.Author;
 import com.kwiniarski97.models.dtos.AuthenticateDTO;
 import com.kwiniarski97.models.dtos.AuthenticationDTO;
 import com.kwiniarski97.models.dtos.AuthorCreateDTO;
+import com.kwiniarski97.models.dtos.AuthorDTO;
 import com.kwiniarski97.repository.AuthorRepository;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class AuthorService {
 
     public AuthenticationDTO authenticate(AuthenticateDTO auth) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, PasswordDoesntMatchException {
         var author = authorRepository.getAuthorByNickName(auth.nickName);
-        if(author == null){
+        if (author == null) {
             throw new EntityNotFoundException();
         }
         var passwordHash = authService.getPasswordHash(auth.password, author.getPasswordSalt());
@@ -53,5 +54,10 @@ public class AuthorService {
             throw new PasswordDoesntMatchException();
         }
         return null;
+    }
+
+    public AuthorDTO getById(long id) {
+        var author = authorRepository.findOne(id);
+        return mapper.map(author, AuthorDTO.class);
     }
 }

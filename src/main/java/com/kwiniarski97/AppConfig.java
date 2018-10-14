@@ -21,7 +21,7 @@ public class AppConfig {
             protected void configure() {
                 mapping(PostCreateDTO.class, Post.class);
                 mapping(AuthorCreateDTO.class, Author.class);
-                mapping(PostRecentDTO.class, Post.class);
+                mapping(PostReducedDTO.class, Post.class);
                 mapping(Author.class, AuthorDTO.class);
                 mapping(Tag.class, TagDTO.class);
                 mapping(PostDetailDTO.class, Post.class);

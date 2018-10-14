@@ -12,9 +12,6 @@ public class AuthorDTO {
     public String lastName;
     @Getter
     @Setter
-    public String nickName;
-    @Getter
-    @Setter
     public String email;
     @Getter
     @Setter

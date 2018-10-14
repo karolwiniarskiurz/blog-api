@@ -3,8 +3,9 @@ package com.kwiniarski97.services;
 import com.kwiniarski97.models.domain.Post;
 import com.kwiniarski97.models.dtos.PostCreateDTO;
 import com.kwiniarski97.models.dtos.PostDetailDTO;
-import com.kwiniarski97.models.dtos.PostRecentDTO;
+import com.kwiniarski97.models.dtos.PostReducedDTO;
 import com.kwiniarski97.repository.PostRepository;
+import com.kwiniarski97.repository.TagRepository;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PostService {
@@ -22,16 +24,19 @@ public class PostService {
     private PostRepository repository;
 
     @Autowired
+    TagRepository tagRepository;
+
+    @Autowired
     DozerBeanMapper mapper;
 
     /**
      * @param page 1 - indexed
      */
-    public Page<PostRecentDTO> getLatest(int page) {
+    public Page<PostReducedDTO> getLatest(int page) {
         Pageable request = new PageRequest(page - 1, PAGE_SIZE, Sort.Direction.DESC, "publishDate");
         var entities = repository.findByPublishDateIsNotNullAndDeletedIsFalse(request);
         return entities.map(entity -> {
-            var dest = new PostRecentDTO();
+            var dest = new PostReducedDTO();
             mapper.map(entity, dest);
             return dest;
         });
@@ -71,5 +76,16 @@ public class PostService {
     public PostDetailDTO getById(long id) {
         var post = repository.findOne(id);
         return mapper.map(post, PostDetailDTO.class);
+    }
+
+    public Page<PostReducedDTO> getByTagId(long tagId, int page) {
+        var tag = tagRepository.findOne(tagId);
+        Pageable request = new PageRequest(page - 1, PAGE_SIZE, Sort.Direction.DESC, "publishDate");
+        var entities = repository.findByTagsContains(tag, request);
+        return entities.map(entity -> {
+            var dest = new PostReducedDTO();
+            mapper.map(entity, dest);
+            return dest;
+        });
     }
 }
