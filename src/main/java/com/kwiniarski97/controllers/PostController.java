@@ -2,6 +2,7 @@ package com.kwiniarski97.controllers;
 
 import com.kwiniarski97.models.domain.Post;
 import com.kwiniarski97.models.dtos.PostCreateDTO;
+import com.kwiniarski97.models.dtos.PostDetailDTO;
 import com.kwiniarski97.models.dtos.PostRecentDTO;
 import com.kwiniarski97.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,17 @@ public class PostController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(value = "id") long id) {
         postService.delete(id);
+    }
+
+    @PutMapping("/update/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void update(@PathVariable(value = "id") long id, @RequestBody PostCreateDTO post) {
+        postService.update(id, post);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public PostDetailDTO getById(@PathVariable(value = "id") long id){
+        return postService.getById(id);
     }
 }

@@ -6,23 +6,23 @@ import lombok.Setter;
 public class AuthorCreateDTO {
     @Getter
     @Setter
-    private String firstName;
+    public String firstName;
     @Getter
     @Setter
-    private String lastName;
+    public String lastName;
     @Getter
     @Setter
-    private String nickName;
+    public String nickName;
     @Getter
     @Setter
-    private String password;
+    public String password;
     @Getter
     @Setter
-    private String email;
+    public String email;
     @Getter
     @Setter
-    private String avatarPath;
+    public String avatarPath;
     @Getter
     @Setter
-    private String description;
+    public String description;
 }

@@ -3,12 +3,11 @@ package com.kwiniarski97.models.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
-public class TagDTO {
+public class AuthenticateDTO {
     @Getter
     @Setter
-    public long id;
-
+    public String nickName;
     @Getter
     @Setter
-    public String name;
+    public String password;
 }

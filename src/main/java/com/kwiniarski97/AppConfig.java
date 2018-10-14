@@ -24,6 +24,7 @@ public class AppConfig {
                 mapping(PostRecentDTO.class, Post.class);
                 mapping(Author.class, AuthorDTO.class);
                 mapping(Tag.class, TagDTO.class);
+                mapping(PostDetailDTO.class, Post.class);
             }
         });
         return d;

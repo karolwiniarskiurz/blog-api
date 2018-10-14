@@ -2,46 +2,29 @@ package com.kwiniarski97.models.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Set;
 
 public class PostRecentDTO {
     @Getter
     @Setter
-    private long id;
+    public long id;
     @Getter
     @Setter
-    private String title;
+    public String title;
     @Getter
     @Setter
-    private String subtitle;
+    public String subtitle;
     @Getter
     @Setter
-    private String mainImagePath;
+    public String mainImageThumbnailPath;
     @Getter
     @Setter
-    private String mainImageThumbnailPath;
+    public Timestamp publishDate;
     @Getter
     @Setter
-    private String body;
+    public long score;
     @Getter
     @Setter
-    private Timestamp creationDate;
-    @Getter
-    @Setter
-    private Timestamp publishDate;
-    @Getter
-    @Setter
-    private long views;
-    @Getter
-    @Setter
-    private long score;
-    @Getter
-    @Setter
-    private AuthorDTO author;
-    @Getter
-    @Setter
-    private Set<TagDTO> tags;
+    public AuthorDTO author;
 }

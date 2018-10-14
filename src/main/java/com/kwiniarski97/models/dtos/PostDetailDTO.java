@@ -3,9 +3,13 @@ package com.kwiniarski97.models.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
-public class PostCreateDTO {
+public class PostDetailDTO {
+    @Getter
+    @Setter
+    public long id;
     @Getter
     @Setter
     public String title;
@@ -23,9 +27,20 @@ public class PostCreateDTO {
     public String body;
     @Getter
     @Setter
-    public long authorId;
+    public Timestamp creationDate;
+    @Getter
+    @Setter
+    public Timestamp publishDate;
+    @Getter
+    @Setter
+    public long views;
+    @Getter
+    @Setter
+    public long score;
+    @Getter
+    @Setter
+    public AuthorDTO author;
     @Getter
     @Setter
     public Set<TagDTO> tags;
-
 }

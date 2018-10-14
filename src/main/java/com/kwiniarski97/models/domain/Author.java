@@ -14,6 +14,7 @@ public class Author {
     private long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String nickName;
     private String passwordHash;
     private String passwordSalt;
@@ -128,5 +129,13 @@ public class Author {
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

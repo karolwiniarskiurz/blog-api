@@ -2,6 +2,7 @@ package com.kwiniarski97.services;
 
 import com.kwiniarski97.models.domain.Post;
 import com.kwiniarski97.models.dtos.PostCreateDTO;
+import com.kwiniarski97.models.dtos.PostDetailDTO;
 import com.kwiniarski97.models.dtos.PostRecentDTO;
 import com.kwiniarski97.repository.PostRepository;
 import org.dozer.DozerBeanMapper;
@@ -61,4 +62,14 @@ public class PostService {
         return new Timestamp(new Date().getTime());
     }
 
+    public void update(long id, PostCreateDTO createDTO) {
+        var post = repository.findOne(id);
+        mapper.map(createDTO, post);
+        repository.flush();
+    }
+
+    public PostDetailDTO getById(long id) {
+        var post = repository.findOne(id);
+        return mapper.map(post, PostDetailDTO.class);
+    }
 }
